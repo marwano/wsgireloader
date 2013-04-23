@@ -1,14 +1,14 @@
 
 from setuptools import setup
-from wsgireloader import __version__
+import re
 
 readme = open('README.rst').read()
 changes = open('CHANGES.txt').read()
-
+version = re.findall("__version__ = '(.*)'", open('wsgireloader.py').read())[0]
 try:
-    version = __import__('utile').git_version(__version__)
+    version = __import__('utile').git_version(version)
 except ImportError:
-    version = __version__
+    pass
 
 setup(
     name='wsgireloader',
